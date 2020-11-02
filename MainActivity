@@ -1,0 +1,95 @@
+package ru.samsung.itschool.book;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toast toast = Toast.makeText(this, "onCreate", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast toast = Toast.makeText(this, "onPause", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast toast = Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast toast = Toast.makeText(this, "onStop", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast toast = Toast.makeText(this, "onResume", Toast.LENGTH_SHORT);
+
+    }
+
+    public void run(View v){
+        EditText etA = findViewById(R.id.a);
+        String sA = etA.getText().toString();
+        double a = Double.parseDouble(sA);
+
+        EditText etB = findViewById(R.id.b);
+        String sB = etB.getText().toString();
+        double b = Double.parseDouble(sB);
+
+        EditText etC = findViewById(R.id.c);
+        String sC = etC.getText().toString();
+        double c = Double.parseDouble(sC);
+
+        String r = qe(a, b, c);
+        TextView tvRes = findViewById(R.id.res);
+        tvRes.setText(r);
+    }
+    public String qe(double a, double b, double c){
+        if (a == 0 && b == 0 && c == 0){
+            return "any";
+        }
+        if (a == 0 && b == 0){
+            return "none";
+        }
+        if (a == 0){
+            return Double.toString(-(c / b));
+        }
+        else{
+            double d = (b * b - 4 * a * c);
+            double x1 = (-b + Math.sqrt(d)) / (2 * a);
+            double x2 = (-b - Math.sqrt(d)) / (2 * a);
+            if (d > 0){
+                return (Double.toString(x1) + " " + Double.toString(x2));
+            }
+            if (d == 0){
+                return Double.toString(x1);
+            }
+            else{
+                return "none";
+            }
+        }
+    }
+
+
+
+
+}
